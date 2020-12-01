@@ -25,13 +25,13 @@ const Homepage = props => {
     };
 
     return (
-        <div className={styles.Homepage}>
+        <section className={styles.Homepage}>
             <form className={styles.SearchBox} onSubmit={(event) => props.getUser(event, input.value)}>
                 <h4>Find a github user</h4>
                 <Input {...input} action={onChangeInput}/>
                 <Button>Submit</Button>
             </form>
-        </div>
+        </section>
     );
 };
 
