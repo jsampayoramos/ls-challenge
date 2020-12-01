@@ -5,7 +5,7 @@ import Button from '../../Components/UI/Button/Button';
 
 import styles from './Homepage.module.css';
 
-const Homepage = () => {
+const Homepage = props => {
     const [input, setInput] = useState({
         type: 'input',
         config: {
@@ -26,7 +26,7 @@ const Homepage = () => {
 
     return (
         <div className={styles.Homepage}>
-            <form className={styles.SearchBox}>
+            <form className={styles.SearchBox} onSubmit={(event) => props.getUser(event, input.value)}>
                 <h4>Find a github user</h4>
                 <Input {...input} action={onChangeInput}/>
                 <Button>Submit</Button>
