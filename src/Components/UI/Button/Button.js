@@ -4,7 +4,7 @@ import styles from './Button.module.css';
 
 const button = ({children}) => {
     return (
-        <button className={styles.Button}>
+        <button className={styles.Button} data-test="component-button">
             {children}
         </button>
     );

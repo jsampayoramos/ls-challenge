@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 
 import { Switch, Route, useHistory } from 'react-router-dom';
 
@@ -44,7 +44,7 @@ const reducer = (state, action) => {
 };
 
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, initialState);
     
   const history = useHistory();
 
