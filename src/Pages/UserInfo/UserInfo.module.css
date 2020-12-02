@@ -1,14 +1,12 @@
 .UserInfo {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 50px;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 25px 0;
+    max-width: 600px;
 }
 
 .UserInfoContainer {
-    max-width: 800px;
-    width: 800px;
-    min-height: 500px;
     border: 1px solid #d3d3d3;
     box-shadow: 5px 5px 5px #d3d3d3;
     display: flex;
@@ -18,29 +16,66 @@
 }
 
 .AvatarContainer {
-    width: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 20px 0 10px 0;
+}
+
+.AvatarContainer div {
+    width: 100%;
+    height: 70%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #00b5b5;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.AvatarContainer div span {
+    padding: 5px 10px 0 0;
+    color: white;
+    cursor: pointer;
 }
 
 .AvatarContainer img {
-    width: 100%;
+    width: 200px;
     height: auto;
     border-radius: 50%;
+    z-index: 100;
 }
 
 .UserInfoDetails {
-    width: 70%;
-    padding: 5px 10px;
+    width: 100%;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .UserInfoDetails h4 {
     font-weight: 300;
+    font-size: 1.5rem;
 }
 
 .UserInfoDetails ul {
     list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.UserInfoDetails ul li {
+    width: 30%;
+    text-align: center;
 }
 
 .UserInfoDetails hr {
     border: 1px solid #00b5b5;
+    width: 50px;
     margin: 5px 0;
 }

@@ -1,24 +1,30 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import RepoItem from '../../Components/RepoItem/RepoItem';
 
 import styles from './UserInfo.module.css';
 
-const userInfo = props => {
+const UserInfo = props => {
+    const history = useHistory();
+    
     const {avatar_url, name, public_repos } = props.user;
     
-    const reposElements = props.repos.map(repo => <RepoItem>{repo.name}</RepoItem>)
-    console.log(props.repos)
+    const reposElements = props.repos.map(repo => <RepoItem>{repo.name}</RepoItem>);
+    
     return (
         <section className={styles.UserInfo}>
             <div className={styles.UserInfoContainer}>
                 <div className={styles.AvatarContainer}>
+                    <div>
+                        <span onClick={() => history.push('/')}>Back</span>
+                    </div>
                     <img src={avatar_url} alt='avatar' />
                 </div>
                 <div className={styles.UserInfoDetails}>
-                    <h4>{name}</h4>
+                    <h4>{name || '[User with no name]'}</h4>
                     <hr/>
-                    <p>{`${public_repos} public repos:`}</p>
+                    <p>{`${public_repos} public repos`}</p>
                     <ul>
                         {reposElements}
                     </ul>
@@ -28,4 +34,4 @@ const userInfo = props => {
     );
 };
 
-export default userInfo;
+export default UserInfo;
