@@ -65,17 +65,30 @@
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     margin-top: 20px;
 }
 
 .UserInfoDetails ul li {
-    width: 30%;
+    width: 33%;
     text-align: center;
+    overflow: hidden;
 }
 
 .UserInfoDetails hr {
     border: 1px solid #00b5b5;
     width: 50px;
     margin: 5px 0;
+}
+
+@media only screen and (max-width: 550px) {
+    .UserInfoDetails ul li {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .UserInfoDetails ul li {
+        width: 100%;
+    }
 }
