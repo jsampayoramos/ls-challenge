@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 
 import styles from './RepoItem.module.css';
 
-const repoItem = ({children}) => {
+const RepoItem = ({children}) => {
     return (
         <li className={styles.RepoItem}>{children}</li>
     );
 };
 
-repoItem.propTypes = {
+RepoItem.propTypes = {
     children: PropTypes.string
 };
 
-export default repoItem;
+export default RepoItem;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Layout.module.css';
 
-const layout = ({children}) => {
+const Layout = ({children}) => {
     return (
         <div className={styles.Layout}>
             <header>
@@ -17,4 +17,4 @@ const layout = ({children}) => {
     );
 };
 
-export default layout;
+export default Layout;

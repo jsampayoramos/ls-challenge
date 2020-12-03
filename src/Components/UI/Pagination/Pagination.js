@@ -4,7 +4,7 @@ import Proptypes from 'prop-types';
 
 import styles from './Pagination.module.css';
 
-const pagination = props => {
+const Pagination = props => {
     const { page, totalPages, changePage} = props;
     
     if(totalPages === 1) return null;
@@ -18,10 +18,10 @@ const pagination = props => {
     );
 };
 
-pagination.propTypes = {
+Pagination.propTypes = {
     page: Proptypes.number.isRequired,
     totalPages: Proptypes.number.isRequired,
     changePage: Proptypes.func.isRequired
 }
 
-export default pagination;
+export default Pagination;

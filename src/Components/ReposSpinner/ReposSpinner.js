@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import styles from './ReposSpinner.module.css';
 
-const reposSpinner = ({ style }) => {
+const ReposSpinner = ({ style }) => {
     return (
         <div className={styles.SpinnerContainer} style={style}>
             <div className={styles.ldsRing}>
@@ -17,8 +17,8 @@ const reposSpinner = ({ style }) => {
     );
 };
 
-reposSpinner.propTypes = {
+ReposSpinner.propTypes = {
     style: PropTypes.object
 };
 
-export default reposSpinner;
+export default ReposSpinner;

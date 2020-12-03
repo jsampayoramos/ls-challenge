@@ -4,7 +4,7 @@ import Proptypes from 'prop-types';
 
 import styles from './Button.module.css';
 
-const button = ({children}) => {
+const Button = ({children}) => {
     return (
         <button className={styles.Button} data-test="component-button">
             {children}
@@ -12,8 +12,8 @@ const button = ({children}) => {
     );
 };
 
-button.propTypes = {
+Button.propTypes = {
     children: Proptypes.string.isRequired
 }
 
-export default button;
+export default Button;

@@ -1,10 +1,9 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
 import { findByTestAttr } from '../../utils/testUtils';
 
 import Homepage from './Homepage';
-import Input from '../../components/UI/Input/Input';
 import StateContexProvider from '../../context/stateContext';
 
 const mountSetup = () => {

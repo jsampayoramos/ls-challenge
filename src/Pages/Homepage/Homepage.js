@@ -29,7 +29,7 @@ const Homepage = () => {
         });
     };
 
-    const onSubmitRequest = async event => {
+    const onSubmitUserInfoRequest = async event => {
         event.preventDefault();
         dispatch({ type: 'SEND_REQUEST' });
         try {
@@ -49,7 +49,7 @@ const Homepage = () => {
 
     return (
         <section className={styles.Homepage}>
-            <form className={styles.SearchBox} onSubmit={onSubmitRequest} data-test="component-searchBox">
+            <form className={styles.SearchBox} onSubmit={onSubmitUserInfoRequest} data-test="component-searchBox">
                 <h4>Find a GitHub user</h4>
                 <Input {...input} action={onChangeInput}/>
                 {state.errorMessage ? <p>{`Error: ${state.errorMessage}`}</p> : null}

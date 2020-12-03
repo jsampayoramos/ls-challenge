@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Spinner.module.css';
 
-const spinner = () => {
+const Spinner = () => {
     return (
         <div className={styles.Modal}>
             <div className={styles.ldsRing}>
@@ -15,4 +15,4 @@ const spinner = () => {
     );
 };
 
-export default spinner;
+export default Spinner;

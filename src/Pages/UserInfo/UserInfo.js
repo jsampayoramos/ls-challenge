@@ -19,6 +19,7 @@ const UserInfo = () => {
     const {avatar_url, name, public_repos } = state.userInfo;
 
     React.useEffect(() => {
+        // Set the number of pages of the pagination
         if(public_repos > 30) {
             setTotalPages(Math.ceil(public_repos / 30));
         };
@@ -43,10 +44,11 @@ const UserInfo = () => {
     }, [currentPage, dispatch, state.userInfo.repos_url]);
 
     React.useEffect(() => {
+        //Request repos github api when the current page changes
         getUserRepos();
     }, [getUserRepos, dispatch]);
 
-    const onChangePage = (event, type) => {
+    const onChangePageNumber = (event, type) => {
         event.preventDefault();
         setCurrentPage(prevPage => type === 'incr' ? prevPage + 1 : prevPage - 1);
     };
@@ -74,7 +76,7 @@ const UserInfo = () => {
                     <hr/>
                     <p>{`${public_repos} public repos`}</p>
                     {loadingRepos ? <ReposSpinner style={totalPages > 1 ? {minHeight: '290px'} : null} /> : <ul>{reposElements}</ul>}
-                    <Pagination page={currentPage} totalPages={totalPages} changePage={onChangePage} />
+                    <Pagination page={currentPage} totalPages={totalPages} changePage={onChangePageNumber} />
                 </div>
             </div>
         </section>

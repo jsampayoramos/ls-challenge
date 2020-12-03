@@ -1,33 +1,29 @@
-# Getting Started with Create React App
+# Lovely Stay coding challenge
 
+The app developed in the scope of this challenge enables a user to find a GitHub user by username and have some of its info presented in a card.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Installation
+After cloning the project from https://github.com/jsampayoramos/ls-challenge you should run `npm install` on the root folder to install all dependecies.
+** To run the project in development mode run the `npm start` script. **
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you can find the following scripts:
 
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+It correctly bundles React in production mode and optimizes the build for the best performance, making the code ready to be deployed.
 
 ### `npm run eject`
 
@@ -37,34 +33,59 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Code Structure
 
-## Learn More
+The `src` folder has 4 subfolders:
+* `pages`: contains the pages displayed in the view.
+* `components`: contains components that are used in the pages and that can be reused.
+* `context`: contains a context file to manage state.
+* `utils`: contains a files which either have setup information or functions that are used in several parts of the project.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Pages folder
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The pages folder has the two pages that can be viewed by the users:
+* Homepage (`src/pages/Homepage/Homepage.js`): this is the landing page for the app. It has a container with an input field to insert the GitHub username, and a submit button; 
+* UserInfo (`src/pages/UserInfo/UserInfo.js`): this is the page with the card that contains the info from the GitHub user (profile picture, name, total repos and the list of the public repos);
 
-### Code Splitting
+These pages are managed by `react-router-dom` at `App.js` level.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Components folder
 
-### Analyzing the Bundle Size
+The components folder contains reusable components (some of them are not reused given the small size of the project, but could be used if the project was to grow/develop further) such as input field, button, spinner, ...
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Context folder
 
-### Making a Progressive Web App
+The project includes a context file to manage the state of the app, which includes the user information, user repos, loading status and error messages. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Utils folder
 
-### Advanced Configuration
+This folder includes the test mode setup and two http request functions that are here outsourced for code organization and readability purposes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Descriptions and decisions made
 
-### Deployment
+### App.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The `App.js` file was kept with a relative small amount of code, having mostly the `jsx` returned, which is the two pages of the app. This enables other developers to easily understand how the code is organized and easily navigate through the folder and file structure.
+For this, it was decided to have a context file which reduces the need for prop drilling. The context provider is located in the `index.js` file because the `App.js` uses a piece of the state to render a loading spinner.
 
-### `npm run build` fails to minify
+### Homepage.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The `Homepage.js` file is the landing page. It has an input field which has a value managed by a local state. This is because the input value is only used at this component. This component also has the code regarding the request to the GitHub API to get the user information. This user information is then dispatched to the context becoming available to `UserInfo.js`.
+
+### UserInfo.js
+
+The `UserInfo.js` file contains the `jsx` for the user info card. It also contains the code to request the user repos, which is requested on mount and dispatched to the context file. Given that each GitHub response provides a maximum of 30 repos, a pagination was implemented to request different pages to the GitHub API.
+
+## Tests
+
+Two automatic tests were implemented for the `Homepage.js`:
+* Test that the search box is always renderer;
+* Test that when the input field changes the update function of `useState` is called;
+
+To run the test run the script `npm run test`.
+
+### Aditional information
+
+CSS Modules were used to allow CSS scoping. This is not very relevant for small sized projects such as this one, but would become more and more relevant if the project was to grow/develop further.
+
+** Have fun :) **
