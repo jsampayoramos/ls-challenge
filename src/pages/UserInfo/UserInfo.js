@@ -75,7 +75,7 @@ const UserInfo = () => {
                     <h4>{name || '[user with no name]'}</h4>
                     <hr/>
                     <p>{`${public_repos} public repos`}</p>
-                    {loadingRepos ? <ReposSpinner style={totalPages > 1 ? {minHeight: '290px'} : null} /> : <ul>{reposElements}</ul>}
+                    {loadingRepos ? <ReposSpinner style={totalPages > 1 ? {height: `290px`} : null} /> : <ul>{reposElements}</ul>}
                     <Pagination page={currentPage} totalPages={totalPages} changePage={onChangePageNumber} />
                 </div>
             </div>
