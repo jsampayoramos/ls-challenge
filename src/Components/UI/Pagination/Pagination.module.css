@@ -1,0 +1,19 @@
+.Pagination {
+    margin-top: 5px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+}
+
+.Pagination span {
+    width: 20px;
+    display: block;
+    text-align: center;
+}
+
+.Pagination span:first-child {
+    justify-self: end;
+}
+
+.Pagination span:first-child, .Pagination span:last-child {
+    cursor: pointer;
+}

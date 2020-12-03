@@ -1,13 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import Input from '../../Components/UI/Input/Input';
 import Button from '../../Components/UI/Button/Button';
+import { fetchUserInfo } from '../../utils/httpRequest';
+import { StateContext } from '../../context/stateContext';
 
 import styles from './Homepage.module.css';
 
-const Homepage = props => {
-    const [input, setInput] = React.useState({
+const Homepage = () => {
+    const [ input, setInput ] = React.useState({
         type: 'input',
         config: {
             required: true,
@@ -15,7 +17,9 @@ const Homepage = props => {
         },
         value: ''
     });
-    
+    const { state, dispatch } = React.useContext(StateContext);
+    const history = useHistory();
+
     const onChangeInput = event => {
         setInput(prevState => {
             return {
@@ -25,21 +29,34 @@ const Homepage = props => {
         });
     };
 
+    const onSubmitRequest = async event => {
+        event.preventDefault();
+        dispatch({ type: 'SEND_REQUEST' });
+        try {
+            const userInfo = await fetchUserInfo(`https://api.github.com/users/${input.value}`);
+            if(userInfo.response.status !== 200) {
+                const error = new Error();
+                error.message = userInfo.parsedResponse.message;
+                throw error;
+            };
+            dispatch({ type: 'GET_USERS_SUCCESS', payload: userInfo.parsedResponse} );
+            
+            history.push(`/userinfo/${userInfo.parsedResponse.id}`);
+        } catch (err) {
+            dispatch({ type: 'RESPONSE_ERROR', payload: err.message });
+        };
+    };
+
     return (
         <section className={styles.Homepage}>
-            <form className={styles.SearchBox} onSubmit={(event) => props.getUser(event, input.value)} data-test="component-searchBox">
+            <form className={styles.SearchBox} onSubmit={onSubmitRequest} data-test="component-searchBox">
                 <h4>Find a GitHub user</h4>
                 <Input {...input} action={onChangeInput}/>
-                {props.error ? <p>{`Error: ${props.error}`}</p> : null}
+                {state.errorMessage ? <p>{`Error: ${state.errorMessage}`}</p> : null}
                 <Button>Submit</Button>
             </form>
         </section>
     );
 };
-
-Homepage.propTypes = {
-    getUser: PropTypes.func.isRequired,
-    error: PropTypes.string
-}
 
 export default Homepage;

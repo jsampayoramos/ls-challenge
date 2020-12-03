@@ -70,7 +70,7 @@
 }
 
 .UserInfoDetails ul li {
-    width: 33%;
+    width: 50%;
     text-align: center;
     overflow: hidden;
 }
@@ -81,13 +81,7 @@
     margin: 5px 0;
 }
 
-@media only screen and (max-width: 550px) {
-    .UserInfoDetails ul li {
-        width: 50%;
-    }
-}
-
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     .UserInfoDetails ul li {
         width: 100%;
     }
