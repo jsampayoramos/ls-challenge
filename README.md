@@ -16,7 +16,7 @@ In the project directory, you can find the following scripts:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm test`
+### `npm test a`
 
 Launches the test runner in the interactive watch mode.
 
@@ -78,7 +78,7 @@ The `UserInfo.js` file contains the `jsx` for the user info card. It also contai
 
 ## Tests
 
-Two automatic tests were implemented for the `Homepage.js`:
+Two automatic tests were implemented for the `Homepage.js` (see file `Homepage.test.js`):
 * Test that the search box is always renderer;
 * Test that when the input field changes the update function of `useState` is called;
 
@@ -86,4 +86,5 @@ To run the test run the script `npm run test`.
 
 ### Aditional information
 
+When errors are thrown by the GitHub API, the error message provided by the API response is presented to the user. In a project which involved a backend component as well, the messages would provide more specific information (the GitHub API does not provide very specific messages).
 CSS Modules were used to allow CSS scoping. This is not very relevant for small sized projects such as this one, but would become more and more relevant if the project was to grow/develop further.

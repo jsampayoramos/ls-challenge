@@ -14,13 +14,13 @@ const mountSetup = () => {
     );
 };
 
-test('Search box renders withouts errors', () => {
+test('it should render search box without errors', () => {
     const wrapper = mountSetup();
     const searchBoxComponent = findByTestAttr(wrapper, 'component-searchBox');
     expect(searchBoxComponent.length).toBe(1);
 });
 
-test('State updates with input box upon change', () => {    
+test('it should update state upon input box change', () => {    
     const mockSetInput = jest.fn();
     React.useState = jest.fn(() => [{type: 'input', config: {}, value: ''}, mockSetInput]);
 
