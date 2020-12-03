@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Installation
 After cloning the project from https://github.com/jsampayoramos/ls-challenge you should run `npm install` on the root folder to install all dependecies.
-** To run the project in development mode run the `npm start` script. **
+**To run the project in development mode run the `npm start` script.**
 
 ## Available Scripts
 
@@ -39,7 +39,7 @@ The `src` folder has 4 subfolders:
 * `pages`: contains the pages displayed in the view.
 * `components`: contains components that are used in the pages and that can be reused.
 * `context`: contains a context file to manage state.
-* `utils`: contains a files which either have setup information or functions that are used in several parts of the project.
+* `utils`: contains a file which has setup information and functions that are used in several parts of the project.
 
 ### Pages folder
 
@@ -87,5 +87,3 @@ To run the test run the script `npm run test`.
 ### Aditional information
 
 CSS Modules were used to allow CSS scoping. This is not very relevant for small sized projects such as this one, but would become more and more relevant if the project was to grow/develop further.
-
-** Have fun :) **
