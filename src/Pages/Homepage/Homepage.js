@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Input from '../../Components/UI/Input/Input';
-import Button from '../../Components/UI/Button/Button';
+import Input from '../../components/ui/Input/Input';
+import Button from '../../components/ui/Button/Button';
 import { fetchUserInfo } from '../../utils/httpRequest';
 import { StateContext } from '../../context/stateContext';
 

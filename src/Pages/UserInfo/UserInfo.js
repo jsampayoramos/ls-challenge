@@ -1,11 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import RepoItem from '../../Components/RepoItem/RepoItem';
+import RepoItem from '../../components/RepoItem/RepoItem';
 import { StateContext } from '../../context/stateContext';
-import Pagination from '../../Components/UI/Pagination/Pagination';
+import Pagination from '../../components/ui/Pagination/Pagination';
 import { fetchUserRepos } from '../../utils/httpRequest';
-import ReposSpinner from '../../Components/ReposSpinner/ReposSpinner';
+import ReposSpinner from '../../components/ReposSpinner/ReposSpinner';
 
 import styles from './UserInfo.module.css';
 
@@ -51,8 +51,10 @@ const UserInfo = () => {
         setCurrentPage(prevPage => type === 'incr' ? prevPage + 1 : prevPage - 1);
     };
     
-    const reposElements = state.userRepos.map(repo => <RepoItem key={repo.name}>{repo.name}</RepoItem>);
-     
+    let reposElements = state.userRepos.map(repo => <RepoItem key={repo.name}>{repo.name}</RepoItem>);
+    
+    if(reposElements.length === 0) reposElements = <p>(User without public repos!)</p>;
+
     const onBack = () => {
         dispatch({ type: 'INITIALIZE_STATE' });
         history.push('/');

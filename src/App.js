@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Switch, Route } from 'react-router-dom';
 
-import Layout from './Components/Layout/Layout';
-import Homepage from './Pages/Homepage/Homepage';
-import UserInfo from './Pages/UserInfo/UserInfo';
-import Spinner from './Components/Spinner/Spinner';
+import Layout from './components/Layout/Layout';
+import Homepage from './pages/Homepage/Homepage';
+import UserInfo from './pages/UserInfo/UserInfo';
+import Spinner from './components/Spinner/Spinner';
 import { StateContext } from './context/stateContext';
 
 const App = () => {
