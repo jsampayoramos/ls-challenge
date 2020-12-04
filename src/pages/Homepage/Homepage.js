@@ -31,7 +31,7 @@ const Homepage = () => {
 
     const onSubmitUserInfoRequest = async event => {
         event.preventDefault();
-        dispatch({ type: 'SEND_REQUEST' });
+        dispatch({ type: 'SEND_USER_INFO_REQUEST' });
         try {
             const userInfo = await fetchUserInfo(`https://api.github.com/users/${input.value}`);
             if(userInfo.response.status !== 200) {
@@ -39,11 +39,10 @@ const Homepage = () => {
                 error.message = userInfo.parsedResponse.message;
                 throw error;
             };
-            dispatch({ type: 'GET_USERS_SUCCESS', payload: userInfo.parsedResponse} );
-            
+            dispatch({ type: 'GET_USER_INFO_SUCCESS', payload: userInfo.parsedResponse } );
             history.push(`/userinfo/${userInfo.parsedResponse.id}`);
         } catch (err) {
-            dispatch({ type: 'RESPONSE_ERROR', payload: err.message });
+            dispatch({ type: 'GET_USER_ERROR', payload: err.message });
         };
     };
 
@@ -52,7 +51,7 @@ const Homepage = () => {
             <form className={styles.SearchBox} onSubmit={onSubmitUserInfoRequest} data-test="component-searchBox">
                 <h4>Find a GitHub user</h4>
                 <Input {...input} action={onChangeInput}/>
-                {state.errorMessage ? <p>{`Error: ${state.errorMessage}`}</p> : null}
+                {state.user.errorMessage ? <p>{`Error: ${state.user.errorMessage}`}</p> : null}
                 <Button>Submit</Button>
             </form>
         </section>

@@ -13,10 +13,9 @@ const UserInfo = () => {
     const { state, dispatch } = React.useContext(StateContext);
     const [currentPage, setCurrentPage] = React.useState(1);
     const [totalPages, setTotalPages] = React.useState(1);
-    const [loadingRepos, setLoadingRepos] = React.useState(false);
     const history = useHistory();
     
-    const {avatar_url, name, public_repos } = state.userInfo;
+    const {avatar_url, name, public_repos, repos_url } = state.user.data;
 
     React.useEffect(() => {
         // Set the number of pages of the pagination
@@ -26,22 +25,20 @@ const UserInfo = () => {
     }, [public_repos]);
 
     const getUserRepos = React.useCallback(async () => {
-        setLoadingRepos(true);
+        dispatch({ type: 'SEND_USER_REPOS_REQUEST' });
         try {
-            const userRepos = await fetchUserRepos(state.userInfo.repos_url, currentPage);
+            const userRepos = await fetchUserRepos(repos_url, currentPage);
             if(userRepos.response.status !== 200) {
                 const error = new Error();
                 error.message = userRepos.parsedResponse.message;
                 throw error;
             };
-            dispatch({ type: 'GET_REPOS_SUCCESS', payload: userRepos.parsedResponse} );
-            setLoadingRepos(false);
+            dispatch({ type: 'GET_USER_REPOS_SUCCESS', payload: userRepos.parsedResponse} );
         } catch (err) {
-            dispatch({ type: 'RESPONSE_ERROR', payload: err.message });
-            setLoadingRepos(false);
+            dispatch({ type: 'GET_USER_REPOS_ERROR', payload: err.message });
         };
 
-    }, [currentPage, dispatch, state.userInfo.repos_url]);
+    }, [currentPage, dispatch, repos_url]);
 
     React.useEffect(() => {
         //Request repos github api when the current page changes
@@ -53,9 +50,9 @@ const UserInfo = () => {
         setCurrentPage(prevPage => type === 'incr' ? prevPage + 1 : prevPage - 1);
     };
     
-    let reposElements = state.userRepos.map(repo => <RepoItem key={repo.name}>{repo.name}</RepoItem>);
+    let reposElements = state.repos.data.map(repo => <RepoItem key={repo.name}>{repo.name}</RepoItem>);
     
-    if(reposElements.length === 0) reposElements = <p>(User without public repos!)</p>;
+    if(state.repos.errorMessage) reposElements = <p style={{color: 'red'}}>{`Error: ${state.repos.errorMessage}`}</p>
 
     const onBack = () => {
         dispatch({ type: 'INITIALIZE_STATE' });
@@ -75,7 +72,7 @@ const UserInfo = () => {
                     <h4>{name || '[user with no name]'}</h4>
                     <hr/>
                     <p>{`${public_repos} public repos`}</p>
-                    {loadingRepos ? <ReposSpinner style={totalPages > 1 ? {height: `290px`} : null} /> : <ul>{reposElements}</ul>}
+                    {state.repos.loading ? <ReposSpinner style={totalPages > 1 ? {height: `290px`} : null} /> : <ul>{reposElements}</ul>}
                     <Pagination page={currentPage} totalPages={totalPages} changePage={onChangePageNumber} />
                 </div>
             </div>

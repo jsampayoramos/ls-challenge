@@ -19,7 +19,7 @@ const App = () => {
           <Route path='/' component={Homepage} />
         </Switch>
       </Layout>
-      {state.loading ? <Spinner /> : null}
+      {state.user.loading ? <Spinner /> : null}
     </React.Fragment>
   );
 }

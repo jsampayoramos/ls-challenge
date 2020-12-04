@@ -12,6 +12,7 @@
     padding: 20px;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
+    position: relative;
 }
 
 .SearchBox input {
@@ -33,8 +34,10 @@
 }
 
 .SearchBox p {
-    align-self: end;
-    justify-self: center;
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
     color: red;
     font-size: 0.9rem;
 }
