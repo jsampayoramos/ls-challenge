@@ -1,3 +1,11 @@
+.ErrorUserInfoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+}
+
 .ErrorUserInfo {
     border: 1px solid #d3d3d3;
     box-shadow: 5px 5px 5px #d3d3d3;
@@ -7,6 +15,7 @@
     position: relative;
     min-width: 500px;
     min-height: 300px;
+    margin: auto;
 }
 
 .ErrorUserInfo p {

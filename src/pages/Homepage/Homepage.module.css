@@ -1,7 +1,7 @@
 .Homepage {
     display: flex;
     justify-content: center;
-    align-items: center;;
+    align-items: center;
 }
 
 .SearchBox {
@@ -46,7 +46,7 @@
     .SearchBox {
         min-width: 100%;
     }
-    
+
     .Homepage {
         padding-top: 2rem;
         align-items: flex-start;
