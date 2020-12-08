@@ -8,7 +8,7 @@ const ErrorUserInfo = (props) => {
     return (
         <div className={styles.ErrorUserInfo}>
             <h4>Something went wrong</h4>
-            <p>{`Error Message: ${props.errorMessage}`}</p>
+            <p>{`Error message: ${props.errorMessage}`}</p>
             <Button action={props.action}>Back</Button>
         </div>
     );

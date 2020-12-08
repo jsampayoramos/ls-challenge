@@ -1,4 +1,4 @@
-.UserInfoContainer {
+.UserInfoCard {
     border: 1px solid #d3d3d3;
     box-shadow: 5px 5px 5px #d3d3d3;
     display: flex;
@@ -72,6 +72,11 @@
     background-color: #00b5b5;
     width: 50px;
     margin: 5px 0;
+}
+
+.ReposErrorMessage {
+    color: red;
+    padding-bottom: 20px;
 }
 
 @media only screen and (max-width: 500px) {

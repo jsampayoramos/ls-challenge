@@ -8,23 +8,32 @@ import styles from "./UserInfoCard.module.css";
 
 const UserInfoCard = (props) => {
     const {
-        avatar_url = null,
-        name = null,
-        public_repos = null,
+        avatar_url,
+        name,
+        public_repos,
         onBack,
         repos,
         reposLoading,
         totalPages,
         currentPage,
         onChangePageNumber,
+        reposError,
     } = props;
-
-    const reposElements = repos.map((repo) => (
+    console.log(reposError);
+    let reposElements = repos.map((repo) => (
         <RepoItem key={repo.name}>{repo.name}</RepoItem>
     ));
 
+    if (reposError) {
+        reposElements = (
+            <p
+                className={styles.ReposErrorMessage}
+            >{`Error message: ${reposError}`}</p>
+        );
+    }
+
     return (
-        <div className={styles.UserInfoContainer}>
+        <div className={styles.UserInfoCard}>
             <div className={styles.AvatarContainer}>
                 <div>
                     <span onClick={onBack}>Back</span>

@@ -16,7 +16,7 @@ const Homepage = () => {
         },
         value: "",
     });
-    const { state, dispatch } = React.useContext(StateContext);
+    const { dispatch } = React.useContext(StateContext);
     const history = useHistory();
 
     const onChangeInput = (event) => {
@@ -28,7 +28,7 @@ const Homepage = () => {
         });
     };
 
-    const onSubmitUserInfoRequest = async (event) => {
+    const onSubmitUserInfoRequest = (event) => {
         event.preventDefault();
         dispatch({ type: "SEND_USER_INFO_REQUEST" });
         history.push(`/userinfo/${input.value}`);
@@ -43,9 +43,6 @@ const Homepage = () => {
             >
                 <h4>Find a GitHub user</h4>
                 <Input {...input} action={onChangeInput} />
-                {state.user.errorMessage ? (
-                    <p>{`Error: ${state.user.errorMessage}`}</p>
-                ) : null}
                 <Button>Submit</Button>
             </form>
         </section>

@@ -1,8 +1,8 @@
 import React from "react";
 import { useHistory, useParams } from "react-router-dom";
+import axios from "axios";
 
 import { StateContext } from "../../context/stateContext";
-import { fetchUserRepos, fetchUserInfo } from "../../utils/httpRequest";
 import ErrorUserInfo from "../../components/ErrorUserInfo/ErrorUserInfo";
 import UserInfoCard from "../../components/UserInfoCard/UserInfoCard";
 
@@ -13,28 +13,25 @@ const UserInfo = () => {
     const [currentPage, setCurrentPage] = React.useState(1);
     const [totalPages, setTotalPages] = React.useState(1);
     const history = useHistory();
-    let { username } = useParams();
+    const { username } = useParams();
 
-    const { public_repos = null, repos_url = null } = state.user.data;
+    const { public_repos, repos_url } = state.user.data;
 
     //Get user information from GitHub API
     const getUserInfo = React.useCallback(async () => {
         try {
-            const user = await fetchUserInfo(
+            const user = await axios(
                 `https://api.github.com/users/${username}`
             );
-
-            if (user.response.status !== 200) {
-                const error = new Error();
-                error.message = user.parsedResponse.message;
-                throw error;
-            }
             dispatch({
                 type: "GET_USER_INFO_SUCCESS",
-                payload: user.parsedResponse,
+                payload: user.data,
             });
         } catch (err) {
-            dispatch({ type: "GET_USER_ERROR", payload: err.message });
+            dispatch({
+                type: "GET_USER_ERROR",
+                payload: err.response.data.message,
+            });
         }
     }, [dispatch, username]);
 
@@ -47,21 +44,17 @@ const UserInfo = () => {
         if (repos_url) {
             dispatch({ type: "SEND_USER_REPOS_REQUEST" });
             try {
-                const userRepos = await fetchUserRepos(repos_url, currentPage);
-
-                if (userRepos.response.status !== 200) {
-                    const error = new Error();
-                    error.message = userRepos.parsedResponse.message;
-                    throw error;
-                }
+                const userRepos = await axios(
+                    `${repos_url}?page=${currentPage}`
+                );
                 dispatch({
                     type: "GET_USER_REPOS_SUCCESS",
-                    payload: userRepos.parsedResponse,
+                    payload: userRepos.data,
                 });
             } catch (err) {
                 dispatch({
                     type: "GET_USER_REPOS_ERROR",
-                    payload: err.message,
+                    payload: err.response.data.message,
                 });
             }
         }
@@ -107,6 +100,7 @@ const UserInfo = () => {
                     totalPages={totalPages}
                     currentPage={currentPage}
                     onChangePageNumber={onChangePageNumber}
+                    reposError={state.repos.errorMessage}
                 />
             ) : null}
         </section>
