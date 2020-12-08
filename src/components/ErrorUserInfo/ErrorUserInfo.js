@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Button from "../ui/Button/Button";
 
@@ -14,6 +15,11 @@ const ErrorUserInfo = (props) => {
             </div>
         </div>
     );
+};
+
+ErrorUserInfo.propTypes = {
+    errorMessage: PropTypes.string.isRequired,
+    action: PropTypes.func.isRequired,
 };
 
 export default ErrorUserInfo;

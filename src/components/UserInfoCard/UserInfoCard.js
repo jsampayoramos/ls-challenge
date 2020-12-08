@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import ReposSpinner from "../../components/ReposSpinner/ReposSpinner";
 import Pagination from "../../components/ui/Pagination/Pagination";
@@ -19,7 +20,7 @@ const UserInfoCard = (props) => {
         onChangePageNumber,
         reposError,
     } = props;
-    console.log(reposError);
+
     let reposElements = repos.map((repo) => (
         <RepoItem key={repo.name}>{repo.name}</RepoItem>
     ));
@@ -59,6 +60,19 @@ const UserInfoCard = (props) => {
             </div>
         </div>
     );
+};
+
+UserInfoCard.propTypes = {
+    avatar_url: PropTypes.string,
+    name: PropTypes.string,
+    public_repos: PropTypes.number,
+    onBack: PropTypes.func,
+    repos: PropTypes.array,
+    reposLoading: PropTypes.bool,
+    totalPages: PropTypes.number,
+    currentPage: PropTypes.number,
+    onChangePageNumber: PropTypes.func,
+    reposError: PropTypes.string,
 };
 
 export default UserInfoCard;
