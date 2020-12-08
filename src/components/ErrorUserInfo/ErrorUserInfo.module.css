@@ -1,0 +1,26 @@
+.ErrorUserInfo {
+    border: 1px solid #d3d3d3;
+    box-shadow: 5px 5px 5px #d3d3d3;
+    padding: 20px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    position: relative;
+    min-width: 500px;
+    min-height: 300px;
+}
+
+.ErrorUserInfo p {
+    align-self: center;
+    justify-self: center;
+}
+
+.ErrorUserInfo button {
+    align-self: end;
+    justify-self: stretch;
+}
+
+.ErrorUserInfo h4 {
+    color: #00b5b5;
+    align-self: start;
+    justify-self: center;
+}
